@@ -7,12 +7,6 @@ declare_id!("C6qJS8UHcGznE7ekkvqA2ZRx7toAHURz1WCKp58GyhKN");
 pub mod oracle_swap {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        msg!("Greetings from: {:?}", ctx.program_id);
-        Ok(())
-    }
-
-    // 管理员充值SOL
     pub fn deposit(ctx: Context<Deposit>, amount: u64) -> Result<()> {
         transfer(
             CpiContext::new(ctx.accounts.system_program.to_account_info(), Transfer {
@@ -20,32 +14,54 @@ pub mod oracle_swap {
                 to: ctx.accounts.sol_vault.to_account_info(),
             }),
             amount,
-        )?;
+        ).map_err(|_| ErrorCode::TransferFailed)?;
         Ok(())
     }
 }
 
-#[derive(Accounts)]
-pub struct Initialize {}
+#[account]
+pub struct Config {
+    pub admin: Pubkey,
+    pub sol_vault: Pubkey,
+}
 
-// 定义 Deposit 结构体，用于管理 deposit 方法需要的上下文，
 #[derive(Accounts)]
 pub struct Deposit<'info> {
-    #[account(mut)]
+    #[account(seeds = [b"config"], bump)]
+    pub config: Account<'info, Config>,
+
+    #[account(mut, address = config.admin)]
     pub admin: Signer<'info>,
 
-    #[account(mut)]
+    #[account(mut, address = config.sol_vault)]
     pub sol_vault: SystemAccount<'info>,
 
     pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
+pub struct Withdraw<'info> {
+    #[account(seeds = [b"config"], bump)]
+    pub config: Account<'info, Config>,
+
+    #[account(mut, address = config.admin)]
+    pub admin: Signer<'info>,
+
+    #[account(mut, address = config.sol_vault)]
+    pub sol_vault: SystemAccount<'info>,
+
+    pub system_program: Program<'info, System>
+}
+
+#[derive(Accounts)]
 pub struct BuySol<'info> {
+    #[account(seeds = [b"config"], bump)]
+    pub config: Account<'info, Config>,
+
     #[account(mut)]
     pub user: Signer<'info>,
 
-    #[account(mut)]
+    #[account(mut, address = config.sol_vault)]
     pub sol_vault: SystemAccount<'info>,
 
     /// CHECK: This is the Pyth price feed account for SOL/USD, It is read-only and trusted.
@@ -55,9 +71,9 @@ pub struct BuySol<'info> {
 }
 
 #[error_code]
-pub enum ErrorCode{
+pub enum ErrorCode {
     #[msg("Insufficient payment provided.")]
     InsufficientPayment,
+    #[msg("Transfer failed.")]
+    TransferFailed,
 }
-
-

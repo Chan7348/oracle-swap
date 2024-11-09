@@ -12,7 +12,7 @@ pub mod playground {
         return Ok(());
     }
 
-    pub fn Greeting(ctx: Context<Greet>) -> Result<()> {
+    pub fn greeting(ctx: Context<Greet>) -> Result<()> {
         msg!("Hello world Anchor program entrypoint!");
 
         let greeting_account = &mut ctx.accounts.greeting_account;

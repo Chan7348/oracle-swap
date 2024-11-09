@@ -1,6 +1,8 @@
 [workspace]
 members = [
-    "programs/*"
+    "programs/oracle-swap",
+    "programs/playground",
+    "programs/fork/spl-token-minter"
 ]
 resolver = "2"
 

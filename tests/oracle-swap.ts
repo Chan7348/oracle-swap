@@ -15,7 +15,7 @@ describe("oracle_swap", () => {
 
     // 临时创建一个 Vault 账户
     let solVault: PublicKey;
-    let vaultKeypair = anchor.web3.Keypair.generate();
+    let vaultKeypair: anchor.web3.Keypair = anchor.web3.Keypair.generate();
     let rentValue: number;
 
     before(async () => {
