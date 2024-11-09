@@ -68,7 +68,7 @@ pub struct CreateToken<'info> {
     /// CHECK: Validate address by deriving pda
     #[account(
         mut,
-        seeds = [b"metadata"m token_metadata_program.key().as_ref(), mint_account.key(), mint_account.key().as_ref()],
+        seeds = [b"metadata", token_metadata_program.key().as_ref(), mint_account.key(), mint_account.key().as_ref()],
         bump,
         seeds::program = token_metadata_program.key(),
     )]
