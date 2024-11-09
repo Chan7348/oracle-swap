@@ -28,12 +28,15 @@ pub mod oracle_swap {
 #[derive(Accounts)]
 pub struct Initialize {}
 
+// 定义 Deposit 结构体，用于管理 deposit 方法需要的上下文，
 #[derive(Accounts)]
 pub struct Deposit<'info> {
     #[account(mut)]
     pub admin: Signer<'info>,
+
     #[account(mut)]
     pub sol_vault: SystemAccount<'info>,
+
     pub system_program: Program<'info, System>,
 }
 
@@ -41,10 +44,13 @@ pub struct Deposit<'info> {
 pub struct BuySol<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
+
     #[account(mut)]
     pub sol_vault: SystemAccount<'info>,
+
     /// CHECK: This is the Pyth price feed account for SOL/USD, It is read-only and trusted.
     pub price_feed: AccountInfo<'info>,
+
     pub system_program: Program<'info, System>,
 }
 

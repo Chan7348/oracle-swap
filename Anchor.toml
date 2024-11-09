@@ -6,15 +6,14 @@ skip-lint = false
 
 [programs.localnet]
 oracle_swap = "C6qJS8UHcGznE7ekkvqA2ZRx7toAHURz1WCKp58GyhKN"
+playground = "BG2eGBn2xY8AQN5EZe6NoqSSLwC3LKHZeiwFYujMnyHG"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
 cluster = "Localnet"
-# wallet = "~/.config/solana/id.json"
 wallet = "./solana-test-wallet.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
-
