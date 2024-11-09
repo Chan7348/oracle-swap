@@ -2,7 +2,7 @@
 members = [
     "programs/oracle-swap",
     "programs/playground",
-    "programs/fork/spl-token-minter"
+    "programs/spl-token-minter"
 ]
 resolver = "2"
 

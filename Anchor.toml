@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-"spl-token-minter" = "D8CuAy6k5kFtTVXhkT2kZadUz6b49Hd9voeRiFcPzbM1"
+spl-token-minter = "D8CuAy6k5kFtTVXhkT2kZadUz6b49Hd9voeRiFcPzbM1"
 oracle_swap = "C6qJS8UHcGznE7ekkvqA2ZRx7toAHURz1WCKp58GyhKN"
 playground = "BG2eGBn2xY8AQN5EZe6NoqSSLwC3LKHZeiwFYujMnyHG"
 
