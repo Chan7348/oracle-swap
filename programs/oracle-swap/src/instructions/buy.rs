@@ -17,3 +17,8 @@ pub struct Buy<'info> {
 
     pub system_program: Program<'info, System>,
 }
+
+pub fn buy(ctx: Context<Buy>, amount: u64) -> Result<()> {
+
+    Ok(())
+}

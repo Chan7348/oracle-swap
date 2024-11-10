@@ -11,8 +11,8 @@ declare_id!("C6qJS8UHcGznE7ekkvqA2ZRx7toAHURz1WCKp58GyhKN");
 pub mod oracle_swap {
     use super::*;
 
-    pub fn configInit(ctx: Context<Config>) -> Result<()> {
-
+    pub fn initialize_config(ctx: Context<InitializeConfig>) -> Result<()> {
+        config::initialize_config(ctx)
     }
 
     pub fn deposit(ctx: Context<Deposit>, amount: u64) -> Result<()> {
@@ -21,5 +21,9 @@ pub mod oracle_swap {
 
     pub fn withdraw(ctx: Context<Withdraw>, amount: u64) -> Result<()> {
         withdraw::withdraw(ctx, amount)
+    }
+
+    pub fn buy(ctx: Context<Buy>, amount: u64) -> Result<()> {
+        buy::buy(ctx, amount)
     }
 }

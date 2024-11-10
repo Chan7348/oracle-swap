@@ -15,6 +15,6 @@ pub struct Withdraw<'info> {
     pub system_program: Program<'info, System>
 }
 
-pub fn withdraw(ctx: Context<Withdraw>, amount: u64) -> Result<()> {
+pub fn withdraw(_ctx: Context<Withdraw>, _amount: u64) -> Result<()> {
     Ok(())
 }
